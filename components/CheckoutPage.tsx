@@ -7,6 +7,7 @@ import {
   PaymentElement,
 } from "@stripe/react-stripe-js";
 import convertToSubcurrency from "@/lib/convertToSubcurrency";
+import { getEnvironmentConfig } from "@/lib/getEnvironmentConfig";
 
 const CheckoutPage = ({ amount }: { amount: number }) => {
   const stripe = useStripe();
@@ -43,11 +44,13 @@ const CheckoutPage = ({ amount }: { amount: number }) => {
       return;
     }
 
+    const { returnUrl } = getEnvironmentConfig();
+
     const { error } = await stripe.confirmPayment({
       elements,
       clientSecret,
       confirmParams: {
-        return_url: `http://www.localhost:3000/payment-success?amount=${amount}`,
+        return_url: `${returnUrl}/payment-success?amount=${amount}`,
       },
     });
 

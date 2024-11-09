@@ -1,0 +1,10 @@
+[lcl-host]
+realm-apid = 'localhost'
+
+[org]
+apid = 'leymariel'
+
+[service]
+apid = 'payment_platform'
+category = 'javascript'
+cert-style = 'acme'
